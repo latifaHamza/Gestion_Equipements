@@ -1,0 +1,77 @@
+
+{% extends "baseMachin.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% comment %} 
+{% if user.is_authenticated %} 
+{% if user.username == "latifa" %}
+ {% endcomment %}
+<h1 class="display-4">{{typeEquipee.nom}}</h1>
+<div class="col-md-10 offset-md-1 mt-5">
+<div class="jumbotron" >
+<form action="" method="post"  >
+    {% csrf_token %}
+    <p>l'Attribue nom et l'image déja existé </p><br>
+
+    <div class="row">
+        <table>
+            <tr>
+                <td> <label>Nom d'Attribue : </label>&emsp;</td>
+                <td><input type="text" name="name" required>&emsp; &emsp;</td>
+                <span><span>
+                </tr>
+                <tr>
+                <td> <label>Type d'Attribue : </label>&emsp;</td>
+                <td><select name="typeAttribue" style="width:200px;">
+                    {% for type in typeAttribue %}
+                     <option valeur="{{type.id}}">{{type.nom}}</option>
+                    {% endfor %}  
+                </select></td>
+            </tr>
+        </table>
+       
+    </div>
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        <div class="col-md-4">
+            <a href="{% url 'home' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Save
+            </a> 
+        </div>
+    </div><br><br>
+    
+
+</form>
+
+
+<table class="table table-striped bg-white rounded shadow small" style="width:1000px;">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>nom</td>
+            <td>Type</td>
+        </tr>
+    </thead>
+    <tbody>
+        {% for att in attribue %}
+           {% if att.typeEquipe_id == typeEquipee.id %}
+            <tr>
+                <td>{{att.nom}}</td>
+                <td>{{att.typeAttribue}}</td>
+            </tr>
+            {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>
+</div>
+</div>
+{% comment %} {% endif %}
+{% endif %} {% endcomment %}
+
+{% endblock content %} 

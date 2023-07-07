@@ -1,0 +1,115 @@
+
+{% extends "baseMachin.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% comment %} 
+{% if user.is_authenticated %} 
+{% if user.username == "latifa" %}
+ {% endcomment %}
+<div class="col-md-10 offset-md-1 mt-5">
+<div class="jumbotron" >
+<form action="{% url 'equipements_edit' equipements.id %}" method="post" enctype= 'multipart/form-data'>
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td> <label>Nom d'Equipements : </label>&emsp;</td>
+            <td><input type="text" value="{{equipements.nom}}" name="name">&emsp; &emsp;</td>
+        </tr>
+        
+             {% for val in valeur %}
+          {% if val.equipements_id == equipements.id %}
+          <tr>
+            <td> <label>{{val.attribue}} : </label>&emsp;</td>
+            <td><input type="text" value="{{val.valeur}}" name="{{val.attribue}}"></input>&emsp;&emsp;</td>
+            </tr>
+            {% endif %}
+            {% endfor %} 
+            
+            <tr> <td><label>Image :</label></td>
+                <td>
+                {% if  equipements.photo %}
+                <img
+                  src="{{equipements.photo.url}}"
+                  class="c" width="30px" height="30px"
+                  alt=""
+                />{% endif %} 
+            </td>
+            <tr>
+            <td><label>Modifier Image :</label></td>
+            <td><input type="file"  name="photo"></td>
+            
+        </tr>
+    </table>
+    {% comment %} <div class="row">
+        <label>Nom d'Equipements :</label>
+        <input type="text" name="name"></input>&emsp;&emsp;
+        {% for att in attribue %}
+          {% if att.typeEquipe_id == typeEquipe.id %}
+            <label>{{att.nom}} :</label>&emsp;
+            <input type="text" name="{{att.nom}}"></input>&emsp;&emsp;<br>
+           
+        <label>photo</label>
+        <input type="file" name="photo"></input>
+        
+    </div> {% endcomment %}
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        {% comment %} <div class="col-md-4">
+            <a href="{% url 'machin_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a> 
+        </div> {% endcomment %}
+    </div><br><br>
+    
+
+</form>
+
+
+{% comment %} <table class="table table-striped bg-white rounded shadow small" style="width:1000px;">
+    <thead class="border-bottom font-weight-bold">
+        <tr>
+            <td>nom</td>
+            <td>valuer</td>
+        </tr>
+    </thead>
+    <tbody>
+
+        {% for att in Equipements %}
+        {% if att.typeEquipe_id == typeEquipe.id %}
+
+        {% comment %} {% if att.id == dernier_pk %} {% endcomment %}
+        {% comment %} <tr>
+            <td>nomEquep</td>
+            <td>{{equipements.nom}}</td>
+            {% comment %} <td>{{equipements.id}}</td> {% endcomment %}
+        {% comment %} </tr> {% endcomment %} 
+        {% comment %} {% endif %} {% endcomment %}
+        {% comment %} {% endif %}
+        {% endfor %}
+        {% for att in valuer %}
+        {% if att.equipements_id == equipement.id %}
+
+           {% if att.equipements == dernier_pk %} {% endcomment %}
+            {% comment %} <tr>
+                <td>{{att.attribue}}</td>
+                <td>{{att.valuer}}</td>
+                
+            </tr> {% endcomment %}
+            {% comment %} {% endif %} {% endcomment %}
+            {% comment %} {% endif %}
+            {% endfor %}
+        </tbody>
+    </table>  {% endcomment %}
+</div>
+</div>
+{% comment %} {% endif %}
+{% endif %} {% endcomment %}
+
+{% endblock content %} 

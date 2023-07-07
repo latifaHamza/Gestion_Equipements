@@ -1,0 +1,69 @@
+
+{% extends 'base.html' %} 
+{% load static  %}
+{% block contenu %} 
+{% if user.is_authenticated %} 
+<html>
+    
+<head>
+	<title>Login</title>
+	<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
+	<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+	<link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous">
+    <link rel="stylesheet" href="{% static 'css/styleprofel.css' %}">
+
+</head>
+<body>
+        <div class="col-md-4">
+            <table class="table table-striped bg-white rounded shadow small" style="width:850px;">
+                <thead class="border-bottom font-weight-bold">
+                    <tr>
+                        <td>ID</td>
+                        <td>Nom de colonne</td>
+                        <td>Type de colonne</td>                      
+                        <td>
+                            <a href="/appEquipements/addAttribue/{{typeEquipee.id}}/" class="btn btn-outline-success">
+                                <i class="fas fa-plus"></i> Ajoute un attribue d'Equipments
+                            </a>
+                        </td>
+                    </tr>
+                </thead>
+                <tbody>
+                    {% for attribue in attribue %}
+                    {% if attribue.typeEquipe_id == typeEquipee.id %}
+
+                        <tr>
+                            <td>{{attribue.id }}</td>
+                            <td>{{attribue.nom }}</td>
+                            <td>{{attribue.typeAttribue }}</td>
+                           
+                            <td style="width=500px;">
+                                
+                                <a href="{% url 'Attribue_update' attribue.id %}" class="btn text-secondary px-0">
+                                    <i class="far fa-edit fa-lg"></i>
+                                </a>
+                                <form action="{% url 'attribue_delete' attribue.id %}" method="post" class="d-inline">
+                                    {% csrf_token %}
+                                    <button type="submit" class="btn" onclick='return checkDeleted();'>
+                                        <i class="far fa-trash-alt fa-lg text-danger float-right"></i>
+                                    </button>
+                                </form>
+                            </td>
+                        </tr>
+                    {% endif %}
+                    {% endfor %}
+                </tbody>
+            </table>
+        </div>
+    </div>
+  </body>
+  <script>
+    function checkDeleted(){
+       return confirm("Es-tu sûr Supprimer ! ??");
+    }
+</script>
+
+</html>
+{% endif %}
+{%  endblock %}
+

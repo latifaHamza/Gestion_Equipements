@@ -1,0 +1,87 @@
+
+{% extends "baseMachin.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% if user.is_authenticated %} 
+<script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+
+<h1 class="display-4">{{typeEquipe.nom}}</h1>
+<div class="col-md-10 offset-md-1 mt-5">
+<div class="jumbotron" >
+<form action="" method="post" enctype= 'multipart/form-data'>
+    {% csrf_token %}
+    <table>
+        <tr>
+            <td> <label>Nom d'Equipements : </label>&emsp;</td>
+            <td><input type="text" name="name" required style="width:300px;">&emsp; &emsp;</td>
+        </tr>
+        
+             {% for att in attribue %}
+          {% if att.typeEquipe_id == typeEquipe.id %}
+          <tr>
+            <td> <label>{{att.nom}} : </label>&emsp;</td>
+            {% if att.typeAttribue == "date" %}
+            <td><input type="date" name="{{att.nom}}" style="width:300px;"></input>&emsp;&emsp;</td>
+            {% endif %}
+            {% if att.typeAttribue == "texte" %}
+            <td><input type="text" name="{{att.nom}}" style="width:300px;"></input>&emsp;&emsp;</td>
+            {% endif %}
+            {% if att.typeAttribue == "nombre" %}
+            <td><input type="number" name="{{att.nom}}" style="width:300px;"></input>&emsp;&emsp;</td>
+            {% endif %}
+            {% if att.typeAttribue == "floate" %}
+            <td><input type="text" name="{{att.nom}}" style="width:300px;"></input>&emsp;&emsp;</td>
+            {% endif %}
+            </tr>
+            {% endif %}
+            {% endfor %} 
+            <tr>
+            <td><label>Image :</label></td>
+            <td><input type="file" name="photo" style="width:300px;"></td>
+            
+        </tr>
+    </table>
+    {% comment %} <div class="row">
+        <label>Nom d'Equipements :</label>
+        <input type="text" name="name"></input>&emsp;&emsp;
+        {% for att in attribue %}
+          {% if att.typeEquipe_id == typeEquipe.id %}
+            <label>{{att.nom}} :</label>&emsp;
+            <input type="text" name="{{att.nom}}"></input>&emsp;&emsp;<br>
+           
+        <label>photo</label>
+        <input type="file" name="photo"></input>
+        
+    </div> 
+    </div> {% endcomment %}
+    
+    <div class="row">
+        
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg" onclick='return ajoute();'><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+         {% comment %} <div class="col-md-4">
+            <a href="{% url 'machin_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a> 
+        </div>  {% endcomment %}
+    </div><br><br>
+    
+</form>
+
+</div>
+</div>
+
+{% endif %} 
+<script>
+    function ajoute(){
+        return Swal.fire(
+            'Good job!',
+            'Ajouté avec succes!',
+            'success'
+          )
+    }
+</script>
+{% endblock content %} 

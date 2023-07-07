@@ -1,0 +1,110 @@
+
+{% load static  %}
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-KK94CHFLLe+nY2dmCWGMq91rCGa5gtU4mk92HdvYe+M/SXH301p5ILy+dN9+nJOZ" crossorigin="anonymous">
+    
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.11.2/css/all.min.css">
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0-alpha3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ENjdO4Dr2bkBIFxQpeoTz1HIcje39Wm4jDKdf19U8gI4ddQ3GYNS7NTKfAdVQSZe" crossorigin="anonymous"></script>
+    <script src="https://kit.fontawesome.com/b99e675b6e.js"></script>
+    <link rel="stylesheet" href="{% static 'css/styleb.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+
+    <script src="//cdn.jsdelivr.net/npm/sweetalert2@11"></script>
+    <link rel="shortcut icon" type="image" href="{% static 'image/dna.png' %}">
+    <title>Equipements</title>
+
+    {% if messages %}
+    {% for m in messages %}
+    <script>
+    Swal.fire({
+        title: 'Oops...',
+        text: ,{{m}}
+      })
+    </script>
+    {% endfor %}
+    {% endif %}
+</head>
+<body>
+    <!-- Navbar -->
+    <input type="checkbox" id="check">
+        <label for="check"class="checkbtn">
+            <i class="fas fa-bars"></i>
+        </label>
+<div class="wrapper ">
+    <div class="sidebar ">
+        
+        <img class="logo" src="{% static 'image/logo.JPG' %}" alt="logo">
+       
+        <ul>
+            <li><a href="/home/"><i class="fas fa-home"></i> Accueil</a></li>
+            {% comment %} <li><a href="/equipments/emetuer/"><i class="fas fa-hdd"></i>Emetteur</a></li> {% endcomment %}
+
+            <li class="ulradio"><a href=""><i class="fa fa-tv"></i>&emsp;TNT &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 1 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+            {% comment %} FM {% endcomment %}
+            <li class="ulradio"><a href=""><i class="fa fa-headphones"></i>&emsp;FM &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 2 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+            {% comment %} Equipements {% endcomment %}
+            <li class="ulradio"><a href=""><i class="fas fa-server"></i> Equipements   &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 3 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+           
+            
+            {% if user.is_authenticated %} 
+
+                 <li><a href="/appEquipements/TypeEquipe_form/"><i class="fas fa-cog"></i>Créer un Equipements</a></li>
+             <li><a href="/profil/"><i class="fas fa-user-tag"></i> Profil</a></li>
+
+             {% endif %}
+            <li><a href="#"><i class="fas fa-project-diagram"></i> à propos</a></li>
+           
+        </ul> 
+          <a href="#" style="width:2px;height:2px;"></a>
+          
+    </div>
+    <div class="main_content col-3">  
+        <div class="info">
+                {% block contenu %} {%  endblock %}
+
+      </div>
+    </div>
+</div>
+
+</body>
+<script>
+    function logout(){
+       return confirm("Es-tu sûr Déconnecté ! ??");
+    }
+</script>
+</html> 

@@ -1,0 +1,54 @@
+
+{% extends "baseMachin.html" %}
+
+{% load crispy_forms_tags %}
+{% block content %}
+{% comment %} 
+{% if user.is_authenticated %} 
+{% if user.username == "latifa" %}
+ {% endcomment %}
+
+<div class="col-md-10 offset-md-1 mt-5">
+<div class="jumbotron" >
+<form action="" method="post"  enctype="multipart/form-data">
+    {% csrf_token %}
+    <div class="row">
+        <div class="col-md-4">
+            {{form.fichier|as_crispy_field}}
+        </div>
+    </div>
+    <div class="row">
+        <div class="col-md-4">
+            {{form.nom|as_crispy_field}}
+        </div>
+        <div class="col-md-4">
+            {{form.position|as_crispy_field}}
+        </div>
+        <div class="col-md-4">
+            {{form.nbColumn|as_crispy_field}}
+        </div>
+    </div>
+
+   
+    </div>
+    
+    <div class="row">
+        
+        <div class="col-md-8">
+            <button type="submit" class="btn btn-success btn-block btn-lg"><i class="fas fa-database"></i>
+                Submit</button>
+        </div>
+        {% comment %} <div class="col-md-4">
+            <a href="{% url 'machin_list' %}" class="btn btn-secondary btn-block btn-lg">
+                <i class="fas fa-stream"></i> Back to list
+            </a> 
+        </div> {% endcomment %}
+    </div><br><br>
+</form>
+
+</div>
+</div>
+{% comment %} {% endif %}
+{% endif %} {% endcomment %}
+
+{% endblock content %} 

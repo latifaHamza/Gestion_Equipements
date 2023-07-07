@@ -1,0 +1,67 @@
+
+{% extends 'base.html' %} 
+{% load static  %}
+{% block contenu %} 
+
+<html>
+    
+<head>
+	<title>Login</title>
+	{% comment %} <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous"> {% endcomment %}
+	{% comment %} <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script> {% endcomment %}
+	{% comment %} <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.6.1/css/all.css" integrity="sha384-gfdkjb5BdAXd+lj+gudLWI+BXq4IuLW5IT+brZEZsLFm++aCMlF1V92rMkPaX4PP" crossorigin="anonymous"> {% endcomment %}
+  <link rel="stylesheet" href="{% static 'css/home.css' %}">
+  <link rel="stylesheet" href="{% static 'css/stylebb.css' %}">
+
+  <link rel="stylesheet" href="https://www.w3schools.com/w3css/4/w3.css">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Raleway">
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+</head>
+<body style="background-color: black;">
+	
+	{% comment %} <h2>Image Text</h2> {% endcomment %}
+	<br>
+	<div class="bttn"  style="float:right;">
+	
+	{% if not user.is_authenticated %} 
+		
+	<a href="{% url 'login_view' %}" >
+		<button class="btn btn-outline-primary btnCC" type="submit" >
+			<i class="fa fa-sign-in fa-lg text-block float-right" >   Connecter</i>
+		</button> 
+	</a>
+	{% endif %}
+	{% if user.is_authenticated %} 
+
+	<a href="{% url 'logout' %}" >
+		<button class="btn btn-outline-danger btnCD" onclick='return checkDeleted();' type="submit">
+			<i class="fas fa-sign-out-alt fa-lg text-block float-right"> Déconnecter</i>
+		</button> 
+	</a>
+	{% endif %}
+	
+	<a href="{% url 'register' %}" >
+		<button class="btn btn-outline-warning btnQ" type="submit" >
+			<i class="fas fa-user-plus fa-lg text-block float-right"> Create un compte</i>
+		</button> 
+	</a>
+
+    </div><br><br><br><br><br>
+	<div class="divM">
+	<h1 class="h1M" style="color:white;">Centre Émetteur de Diffusion</h1>
+	<p class="pM" style="color:rgb(204, 212, 219);">Une installation spécialisée dans la transmission de signaux audio et vidéo à travers les ondes électromagnétiques. Grâce à ses émetteurs, antennes et équipements de contrôle, il permet la diffusion de programmes de télévision et de radio sur de grandes distances, assurant ainsi l'accès à l'information et au divertissement pour le grand public.</p>
+	<a  href="" style="color:red;">
+		<button type="button"  class="btn btn-info">Lear more</button>
+	</a>
+    </div>
+    <script type="text/javascript" src="{% static 'JS/scripthome.js' %}"></script>
+  </body>
+</html>
+<script>
+    function checkDeleted(){
+       return confirm("Es-tu sûr Déconnecté ! ??");
+    }
+</script>
+{%  endblock %}
+
+

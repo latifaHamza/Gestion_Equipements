@@ -1,0 +1,38 @@
+.valeur{
+  display: inline;
+    color: rgb(35, 198, 59);
+  }
+
+label{
+  display: inline;
+    font-size: 20px;
+    width: 90px;
+    color: rgb(83, 6, 6);
+
+  }
+.nom{
+  
+  color: rgb(213, 54, 54);
+
+}
+@media(max-width:952px){
+  label{
+    font-size: 10px;
+  }
+  .valeur{
+    font-size: 8px;
+    color: rgb(35, 198, 59);
+  }
+  .imgM{
+    width:400px;
+    height: 340px;
+  }
+}
+.checkbtn{
+  font-size: 30px;
+  margin: 10px;
+  color: black;
+  cursor: pointer;
+  /* background-color: #4b4276; */
+  display: none;
+}

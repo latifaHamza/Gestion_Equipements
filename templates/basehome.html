@@ -1,0 +1,93 @@
+
+{% load static  %}
+
+<html lang="en">
+<head>
+
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style3.css' %}">
+
+    <title>Telediffussion</title>
+</head>
+<body>
+    <!-- Navbar -->
+<div class="wrapper ">
+    <div class="sidebar ">
+        <img class="logo" src="{% static 'image/logo.JPG' %}" alt="logo">
+        <ul>
+            <li><a href="/home/"><i class="fas fa-home"></i> Accueil</a></li>
+            {% comment %} <li><a href="/equipments/emetuer/"><i class="fas fa-hdd"></i>Emetteur</a></li> {% endcomment %}
+
+            <li class="ulradio"><a href=""><i class="fa fa-tv"></i>&emsp;TNT &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 1 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+            {% comment %} FM {% endcomment %}
+            <li class="ulradio"><a href=""><i class="fa fa-headphones"></i>&emsp;FM &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 2 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+            {% comment %} Equipements {% endcomment %}
+            <li class="ulradio"><a href=""><i class="fas fa-server"></i> Equipements   &rsaquo;</a>
+                <span class="sambol">&rsaquo;</span>
+                {% for eq in typeEquipe %}
+                     {% if eq.position_id == 3 %}
+                <ul class="radio">
+                    <li><a href="/appEquipements/Allequipements/{{eq.id}}/">{{eq.nom}}</a></li>
+                </ul>
+                {% endif %}
+                {% endfor %}
+            </li>
+           
+            
+            {% if user.is_authenticated %} 
+
+                 <li><a href="/appEquipements/TypeEquipe_form/"><i class="fas fa-cog"></i>Créer un Equipements</a></li>
+             <li><a href="/profil/"><i class="fas fa-user-tag"></i> Profil</a></li>
+
+             {% endif %}
+            <li><a href="#"><i class="fas fa-project-diagram"></i> à propos</a></li>
+            {% if user.is_authenticated %} 
+            <li><a href="{% url 'logout' %}" >
+                <button class="Btnc">
+  
+                    <div class="sign"><svg viewBox="0 0 512 512"><path d="M217.9 105.9L340.7 228.7c7.2 7.2 11.3 17.1 11.3 27.3s-4.1 20.1-11.3 27.3L217.9 406.1c-6.4 6.4-15 9.9-24 9.9c-18.7 0-33.9-15.2-33.9-33.9l0-62.1L32 320c-17.7 0-32-14.3-32-32l0-64c0-17.7 14.3-32 32-32l128 0 0-62.1c0-18.7 15.2-33.9 33.9-33.9c9 0 17.6 3.6 24 9.9zM352 416l64 0c17.7 0 32-14.3 32-32l0-256c0-17.7-14.3-32-32-32l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32l64 0c53 0 96 43 96 96l0 256c0 53-43 96-96 96l-64 0c-17.7 0-32-14.3-32-32s14.3-32 32-32z"></path></svg></div>
+                    
+                    <div class="text">Login</div>
+                  </button>
+  
+                </a>
+            </li>
+            {% endif %}
+        </ul> 
+        {% comment %} <div class="social_media"> {% endcomment %}
+          <a href="#" style="width:2px;height:2px;"></a>
+          
+      {% comment %} </div> {% endcomment %}
+    </div>
+    <div class="main_content col-3">  
+        <div class="info">
+                {% block contenu %} {%  endblock %}
+
+      </div>
+    </div>
+</div>
+
+</body>
+</html> 
